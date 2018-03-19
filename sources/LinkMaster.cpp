@@ -63,7 +63,7 @@ void LinkMaster::CallbackReceive(Packet *packet, bool chkReceive)
 }
 
 //
-//Retry read pointer is updated as extracted RRP that means successful transmission of the associated packet
+//Retry read pointer is updated as extracted RRP (Return Retry Pointer) that means successful transmission of the associated packet
 //
 void LinkMaster::UpdateRetryPointer(Packet *packet)
 {
@@ -81,7 +81,7 @@ void LinkMaster::UpdateRetryPointer(Packet *packet)
 }
 
 //
-//Extracted FRP is transmitted to the opposite side of the link
+//Extracted FRP (Finish Retry Pointer) is transmitted to the opposite side of the link
 //
 void LinkMaster::ReturnRetryPointer(Packet *packet)
 {

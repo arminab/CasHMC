@@ -93,6 +93,11 @@ public:
 	ofstream plotDataOut;
 	ofstream plotScriptOut;
 	ofstream resultOut;
+    
+    ofstream transactionLatencyOut;
+    ofstream linkLatencyOut;
+    ofstream vaultLatencyOut;
+    // ofstream errorRetryLatencyOut;
 };
 
 }

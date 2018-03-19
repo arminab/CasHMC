@@ -261,8 +261,11 @@ int main(int argc, char **argv)
 			ERROR(" == Error - Could not open trace file ["<<traceFileName<<"]");
 			exit(0);
 		}
-		for(uint64_t cpuCycle=0; cpuCycle<numSimCycles; cpuCycle++) {
-			if(!pendingTran) {
+		//for(uint64_t cpuCycle=0; cpuCycle<numSimCycles; cpuCycle++) {
+        uint64_t cpuCycle = 0;
+        while(1) {
+            cpuCycle++;
+            if(!pendingTran) {
 				if(!traceFile.eof()) {
 					getline(traceFile, line);
 					if(line.size() > 0) {
@@ -298,6 +301,9 @@ int main(int argc, char **argv)
 				}					
 			}
 			casHMCWrapper->Update();
+            if (traceFile.eof() && !pendingTran) {
+                break;
+            }
 		}
 	}
 
