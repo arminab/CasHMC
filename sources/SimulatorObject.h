@@ -38,11 +38,6 @@ public:
 	void Step() {
 		currentClockCycle++;
 	}
-    
-    uint64_t getCurrentClockCycle()
-    {
-        return currentClockCycle;
-    }
 	
 	uint64_t currentClockCycle;
 
