@@ -59,7 +59,7 @@ public:
 	uint64_t address;					//Physical address of request
 	unsigned dataSize;					//[byte] Size of data
 	unsigned transactionID;				//Unique identifier
-	unsigned LNG;
+	unsigned LNG;                       //Total number of flits in the packet
 };
 
 ostream& operator<<(ostream &out, const Transaction &t);

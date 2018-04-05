@@ -1,0 +1,10 @@
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_bwaves_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_bzip2_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_gobmk_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_gromacs_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_hmmer_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_lbm_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_mcf_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_milc_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_sjeng_base.alpha.v0.trc
+./CasHMC -c 100000 -t file -f ./trace/SPEC_CPU2006_example/mase_trace_zeusmp_base.alpha.v0.trc

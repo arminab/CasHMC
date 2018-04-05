@@ -1,0 +1,139 @@
+****************************************************************
+*                      CasHMC version 1.3                      *
+*                       result log file                        *
+*            Date : 2018/03/21      Time : 02:16:23            *
+****************************************************************
+
+- Trace type : file
+- Trace file : ./trace/SPEC_CPU2006_example/mase_trace_bzip2_base.alpha.v0.trc
+
+  ============= CasHMC statistic result =============
+
+  Elapsed epoch : 0
+  Elapsed clock : 299989
+
+        HMC bandwidth : 2.26248 GB/s  (Considered only data size)
+       Link bandwidth : 6.78639 GB/s  (Included flow packet)
+     Transmitted data : 711.688 KB (728768 B)
+
+    Active link power :     250 mW
+     Sleep link power :       0 mW
+      Down link power :       0 mW
+  Total power on link :     250 mW
+
+     Sleep mode ratio :       0 %
+      Down mode ratio :       0 %
+Total low-power ratio :       0 %
+
+    Tran latency mean : 62.9029 ns
+                 std  : 11.3538 ns
+                 max  : 166 ns
+                 min  : 52 ns
+    Link latency mean : 55.9021 ns
+                 std  : 11.3544 ns
+                 max  : 159 ns
+                 min  : 45 ns
+   Vault latency mean : 19.4803 ns
+                 std  : 4.20885 ns
+                 max  : 48.8 ns
+                 min  : 15.2 ns
+   Retry latency mean : 0 ns
+                 std  : 0 ns
+                 max  : 0 ns
+                 min  : 0 ns
+
+           Read count : 5925
+          Write count : 5462
+         Atomic count : 0
+        Request count : 11387
+       Response count : 11385
+           Flow count : 68307
+    Transaction count : 11385
+    Error abort count : 0
+    Error retry count : 0
+
+  ----------------------  [Link 0]
+  |               Read per link : 2847
+  |              Write per link : 0
+  |             Atomic per link : 0
+  |            Request per link : 2847
+  |           Response per link : 2847
+  |               Flow per link : 17082
+  |        Error abort per link : 0
+  |            Sleep mode ratio : 0 %
+  |             Down mode ratio : 0 %
+  |  Total low power mode ratio : 0 %
+  |        Downstream Bandwidth : 0.565669 GB/s
+  |          Upstream Bandwidth : 0.596068 GB/s
+  |             Total Bandwidth : 1.16174 GB/s
+  |  Downstream effec Bandwidth :       0 GB/s
+  |    Upstream effec Bandwidth : 0.0303995 GB/s
+  |       Total effec Bandwidth : 0.0303995 GB/s
+  | Downstream transmitted data :       0  B (0 B)
+  |   Upstream transmitted data :  9.5625 KB (9792 B)
+  -----  Total transmitted data :  9.5625 KB (9792 B)
+
+  ----------------------  [Link 1]
+  |               Read per link : 116
+  |              Write per link : 2731
+  |             Atomic per link : 0
+  |            Request per link : 2847
+  |           Response per link : 2846
+  |               Flow per link : 17073
+  |        Error abort per link : 0
+  |            Sleep mode ratio : 0 %
+  |             Down mode ratio : 0 %
+  |  Total low power mode ratio : 0 %
+  |        Downstream Bandwidth : 1.10804 GB/s
+  |          Upstream Bandwidth : 1.12374 GB/s
+  |             Total Bandwidth : 2.23178 GB/s
+  |  Downstream effec Bandwidth : 0.542621 GB/s
+  |    Upstream effec Bandwidth : 0.558317 GB/s
+  |       Total effec Bandwidth : 1.10094 GB/s
+  | Downstream transmitted data : 170.688 KB (174784 B)
+  |   Upstream transmitted data : 175.625 KB (179840 B)
+  -----  Total transmitted data : 346.312 KB (354624 B)
+
+  ----------------------  [Link 2]
+  |               Read per link : 2846
+  |              Write per link : 1
+  |             Atomic per link : 0
+  |            Request per link : 2847
+  |           Response per link : 2846
+  |               Flow per link : 17076
+  |        Error abort per link : 0
+  |            Sleep mode ratio : 0 %
+  |             Down mode ratio : 0 %
+  |  Total low power mode ratio : 0 %
+  |        Downstream Bandwidth : 0.565718 GB/s
+  |          Upstream Bandwidth : 1.12379 GB/s
+  |             Total Bandwidth : 1.68951 GB/s
+  |  Downstream effec Bandwidth : 0.000198689 GB/s
+  |    Upstream effec Bandwidth : 0.558317 GB/s
+  |       Total effec Bandwidth : 0.558516 GB/s
+  | Downstream transmitted data :      64  B (64 B)
+  |   Upstream transmitted data : 175.625 KB (179840 B)
+  -----  Total transmitted data : 175.688 KB (179904 B)
+
+  ----------------------  [Link 3]
+  |               Read per link : 116
+  |              Write per link : 2730
+  |             Atomic per link : 0
+  |            Request per link : 2846
+  |           Response per link : 2846
+  |               Flow per link : 17076
+  |        Error abort per link : 0
+  |            Sleep mode ratio : 0 %
+  |             Down mode ratio : 0 %
+  |  Total low power mode ratio : 0 %
+  |        Downstream Bandwidth : 1.10789 GB/s
+  |          Upstream Bandwidth : 0.595472 GB/s
+  |             Total Bandwidth : 1.70336 GB/s
+  |  Downstream effec Bandwidth : 0.542422 GB/s
+  |    Upstream effec Bandwidth : 0.0300021 GB/s
+  |       Total effec Bandwidth : 0.572424 GB/s
+  | Downstream transmitted data : 170.625 KB (174720 B)
+  |   Upstream transmitted data :  9.4375 KB (9664 B)
+  -----  Total transmitted data : 180.062 KB (184384 B)
+
+  * Effec bandwidth takes data transmission into account regardless of packet header and tail
