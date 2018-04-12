@@ -248,6 +248,11 @@ void LinkSlave::Update()
 		bool chkRcv = (downstream ? downBufferDest->ReceiveDown(Buffers[0]) : upBufferDest->ReceiveUp(Buffers[0]));
 		if(chkRcv) {
 			localLinkMaster->ReturnTocken(Buffers[0]);
+            
+            if (downstream) {
+                Buffers[0]->trace->linkSlaveToCrossbarLatency = currentClockCycle - (Buffers[0]->trace->tranTransmitTime + Buffers[0]->trace->linkMasterAvailabilityLatency + Buffers[0]->trace->linkMasterSendLatency + Buffers[0]->trace->linkMasterToSlaveLatency);
+            }
+            
 			DEBUG(ALI(18)<<header<<ALI(15)<<*Buffers[0]<<(downstream ? "Down) " : "Up)   ")
 						<<"SENDING packet to "<<(downstream ? "crossbar switch (CS)" : "HMC controller (HC)"));
 			Buffers.erase(Buffers.begin(), Buffers.begin()+Buffers[0]->LNG);

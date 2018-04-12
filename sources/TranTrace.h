@@ -33,6 +33,16 @@ public:
 		linkFullLat = 0;
 		vaultIssueTime = 0;
 		vaultFullLat = 0;
+        
+        linkMasterAvailabilityLatency = 0;
+        linkMasterSendLatency = 0;
+        linkMasterToSlaveLatency = 0;
+        linkCrossbarToVaultLatency = 0;
+        vaultToDRAMCommandLatency = 0;
+        vaultToCrossbarLatency = 0;
+        crossbarToLinkMasterLatency = 0;
+        linkMasterUpstreamtoLinkSlaveLatency = 0;
+        
 	}
 	~TranTrace() {
 		if(tranFullLat==0 || linkFullLat==0 || vaultFullLat==0) {
@@ -41,7 +51,7 @@ public:
 			exit(0);
 		}
 		else {
-			statis->UpdateStatis(tranFullLat, linkFullLat, vaultFullLat);
+			statis->UpdateStatis(tranFullLat, linkFullLat, vaultFullLat, linkMasterAvailabilityLatency, linkMasterSendLatency, linkMasterToSlaveLatency, linkCrossbarToVaultLatency, vaultToDRAMCommandLatency, vaultToCrossbarLatency, crossbarToLinkMasterLatency, linkMasterUpstreamtoLinkSlaveLatency);
 		}
 	}
 	
@@ -57,6 +67,16 @@ public:
 	
 	unsigned vaultIssueTime; 	//[DRAM clock (tCK)] Time to issue ACTIVATE command corresponding to this transaction
 	unsigned vaultFullLat; 		//[DRAM clock (tCK)] Total latency time from issue ACTIVATE command to return data
+    
+    unsigned linkMasterAvailabilityLatency;
+    unsigned linkMasterSendLatency;
+    unsigned linkMasterToSlaveLatency;
+    unsigned linkSlaveToCrossbarLatency;
+    unsigned linkCrossbarToVaultLatency;
+    unsigned vaultToDRAMCommandLatency;
+    unsigned vaultToCrossbarLatency;
+    unsigned crossbarToLinkMasterLatency;
+    unsigned linkMasterUpstreamtoLinkSlaveLatency;
 };
 
 }

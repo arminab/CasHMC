@@ -175,6 +175,7 @@ void VaultController::Update()
 			if(downBuffers[i] != NULL) {
 				if(ConvPacketIntoCMDs(downBuffers[i])) {
 					int tempLNG = downBuffers[i]->LNG;
+                    downBuffers[i]->trace->vaultToDRAMCommandLatency = currentClockCycle - (downBuffers[i]->trace->tranTransmitTime + downBuffers[i]->trace->linkMasterAvailabilityLatency + downBuffers[i]->trace->linkMasterSendLatency + downBuffers[i]->trace->linkMasterToSlaveLatency + downBuffers[i]->trace->linkSlaveToCrossbarLatency + downBuffers[i]->trace->linkCrossbarToVaultLatency);
 					delete downBuffers[i];
 					downBuffers.erase(downBuffers.begin()+i, downBuffers.begin()+i+tempLNG);
 				}
@@ -191,6 +192,7 @@ void VaultController::Update()
 		}
 		else{
 			if(upBufferDest->ReceiveUp(upBuffers[0])) {
+                upBuffers[0]->trace->vaultToCrossbarLatency = currentClockCycle - (upBuffers[0]->trace->tranTransmitTime + upBuffers[0]->trace->linkMasterAvailabilityLatency + upBuffers[0]->trace->linkMasterSendLatency + upBuffers[0]->trace->linkMasterToSlaveLatency + upBuffers[0]->trace->linkSlaveToCrossbarLatency + upBuffers[0]->trace->vaultToDRAMCommandLatency);
 				DEBUG(ALI(18)<<header<<ALI(15)<<*upBuffers[0]<<"Up)   SENDING packet to crossbar switch (CS)");
 				upBuffers.erase(upBuffers.begin(), upBuffers.begin()+upBuffers[0]->LNG);
 			}

@@ -166,6 +166,7 @@ void HMCController::Update()
 								(*writeDone)(packet->ADRS, currentClockCycle);
 							}
 						}
+                        packet->trace->linkMasterAvailabilityLatency = currentClockCycle - packet->trace->tranTransmitTime;
 						requestAccLNG += packet->LNG;
 						delete downBuffers[0];
 						downBuffers.erase(downBuffers.begin());
@@ -183,6 +184,7 @@ void HMCController::Update()
 			Packet *packet = ConvTranIntoPacket(downBuffers[0]);
 			if(downLinkMasters[link]->Receive(packet)) {
 				DE_CR(ALI(18)<<header<<ALI(15)<<*packet<<"Down) SENDING packet to link mater "<<link<<" (LM_D"<<link<<")");
+                packet->trace->linkMasterAvailabilityLatency = currentClockCycle - packet->trace->tranTransmitTime;
 				delete downBuffers[0];
 				downBuffers.erase(downBuffers.begin());
 			}

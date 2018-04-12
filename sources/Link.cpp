@@ -71,8 +71,13 @@ void Link::Update(bool lastUpdate)
 			DEBUG(ALI(18)<<header<<ALI(15)<<*inFlightPacket<<(downstream ? "Down) " : "Up)   ")<<"DONE transmission packet");
 			inFlightPacket->bufPopDelay = 1;
 			linkSlaveP->linkRxTx.push_back(inFlightPacket);
-			if(inFlightPacket->packetType == RESPONSE)
+            if(inFlightPacket->packetType == REQUEST) {
+                inFlightPacket->trace->linkMasterToSlaveLatency = linkSlaveP->currentClockCycle - (inFlightPacket->trace->tranTransmitTime + inFlightPacket->trace->linkMasterAvailabilityLatency + inFlightPacket->trace->linkMasterSendLatency);
+            }
+            if(inFlightPacket->packetType == RESPONSE) {
 				inFlightPacket->trace->linkFullLat = linkSlaveP->currentClockCycle - inFlightPacket->trace->linkTransmitTime;
+                inFlightPacket->trace->linkMasterUpstreamtoLinkSlaveLatency = linkSlaveP->currentClockCycle - (inFlightPacket->trace->tranTransmitTime + inFlightPacket->trace->linkMasterAvailabilityLatency + inFlightPacket->trace->linkMasterSendLatency + inFlightPacket->trace->linkMasterToSlaveLatency + inFlightPacket->trace->linkSlaveToCrossbarLatency + inFlightPacket->trace->linkCrossbarToVaultLatency + inFlightPacket->trace->vaultToDRAMCommandLatency + inFlightPacket->trace->vaultToCrossbarLatency + inFlightPacket->trace->crossbarToLinkMasterLatency);
+            }
 			inFlightPacket = NULL;
 		}
 		else if(lastUpdate) {

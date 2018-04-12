@@ -104,7 +104,7 @@ public:
 			totalUpLinkDataSize.push_back(0);
 		}		
 	}
-	void UpdateStatis(unsigned tranFull, unsigned linkFull, unsigned vaultFull) {
+	void UpdateStatis(unsigned tranFull, unsigned linkFull, unsigned vaultFull, unsigned linkMasterAvailabilityLatency, unsigned linkMasterSendLatency, unsigned linkMasterToSlaveLatency, unsigned linkCrossbarToVaultLatency, unsigned vaultToDRAMCommandLatency, unsigned vaultToCrossbarLatency, unsigned crossbarToLinkMasterLatency, unsigned linkMasterUpstreamtoLinkSlaveLatency) {
 		tranFullLat.push_back(tranFull);
 		linkFullLat.push_back(linkFull);
 		vaultFullLat.push_back(vaultFull);
