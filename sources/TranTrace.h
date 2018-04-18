@@ -42,6 +42,7 @@ public:
         vaultToCrossbarLatency = 0;
         crossbarToLinkMasterLatency = 0;
         linkMasterUpstreamtoLinkSlaveLatency = 0;
+        linkMasterToHMCControllerLatency = 0;
         
 	}
 	~TranTrace() {
@@ -51,7 +52,7 @@ public:
 			exit(0);
 		}
 		else {
-			statis->UpdateStatis(tranFullLat, linkFullLat, vaultFullLat, linkMasterAvailabilityLatency, linkMasterSendLatency, linkMasterToSlaveLatency, linkCrossbarToVaultLatency, vaultToDRAMCommandLatency, vaultToCrossbarLatency, crossbarToLinkMasterLatency, linkMasterUpstreamtoLinkSlaveLatency);
+			statis->UpdateStatis(tranFullLat, linkFullLat, vaultFullLat, linkMasterAvailabilityLatency, linkMasterSendLatency, linkMasterToSlaveLatency, linkCrossbarToVaultLatency, vaultToDRAMCommandLatency, vaultToCrossbarLatency, crossbarToLinkMasterLatency, linkMasterUpstreamtoLinkSlaveLatency, linkMasterToHMCControllerLatency);
 		}
 	}
 	
@@ -72,11 +73,12 @@ public:
     unsigned linkMasterSendLatency;
     unsigned linkMasterToSlaveLatency;
     unsigned linkSlaveToCrossbarLatency;
-    unsigned linkCrossbarToVaultLatency;
+    unsigned linkCrossbarToVaultLatency; 
     unsigned vaultToDRAMCommandLatency;
     unsigned vaultToCrossbarLatency;
     unsigned crossbarToLinkMasterLatency;
     unsigned linkMasterUpstreamtoLinkSlaveLatency;
+    unsigned linkMasterToHMCControllerLatency;
 };
 
 }

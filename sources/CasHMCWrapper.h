@@ -98,6 +98,7 @@ public:
     ofstream linkLatencyOut;
     ofstream vaultLatencyOut;
     // ofstream errorRetryLatencyOut;
+    ofstream decoupledLatencyOut;
 };
 
 }

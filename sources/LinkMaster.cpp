@@ -446,9 +446,10 @@ void LinkMaster::UpdateField(int nextWriteP, Packet *packet)
 	//Send packet to standby buffer where the packet is ready to be transmitted
 	packet->bufPopDelay = 1;
 	linkRxTx.push_back(packet);
-    if (downstream) {
-        packet->trace->linkMasterSendLatency = currentClockCycle - (packet->trace->linkTransmitTime + packet->trace->linkMasterAvailabilityLatency);
-    } else {
+    if (downstream && packet->packetType == REQUEST) {
+        packet->trace->linkMasterSendLatency = currentClockCycle - (packet->trace->tranTransmitTime + packet->trace->linkMasterAvailabilityLatency);
+
+    } else if (!downstream && packet->packetType == RESPONSE) {
         packet->trace->linkMasterUpstreamtoLinkSlaveLatency = currentClockCycle - (packet->trace->tranTransmitTime + packet->trace->linkMasterAvailabilityLatency + packet->trace->linkMasterSendLatency + packet->trace->linkMasterToSlaveLatency + packet->trace->linkSlaveToCrossbarLatency + packet->trace->linkCrossbarToVaultLatency + packet->trace->vaultToDRAMCommandLatency + packet->trace->vaultToCrossbarLatency + packet->trace->crossbarToLinkMasterLatency);
     }
 	//DEBUG(ALI(18)<<header<<ALI(15)<<*Buffers[0]<<(downstream ? "Down) " : "Up)   ")

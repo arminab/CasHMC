@@ -249,7 +249,7 @@ void LinkSlave::Update()
 		if(chkRcv) {
 			localLinkMaster->ReturnTocken(Buffers[0]);
             
-            if (downstream) {
+            if (downstream && Buffers[0]->packetType == REQUEST) {
                 Buffers[0]->trace->linkSlaveToCrossbarLatency = currentClockCycle - (Buffers[0]->trace->tranTransmitTime + Buffers[0]->trace->linkMasterAvailabilityLatency + Buffers[0]->trace->linkMasterSendLatency + Buffers[0]->trace->linkMasterToSlaveLatency);
             }
             

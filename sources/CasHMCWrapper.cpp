@@ -731,7 +731,15 @@ namespace CasHMC
         //Ttransaction traced latency statistic calculation
         if(tranFullLat.size() != linkFullLat.size()
            || linkFullLat.size() != vaultFullLat.size()
-           || tranFullLat.size() != vaultFullLat.size()) {
+           || tranFullLat.size() != vaultFullLat.size()
+           || tranFullLat.size() != linkMasterAvailabilityLat.size()
+           || linkMasterAvailabilityLat.size() != linkMasterSendLat.size()
+           || linkMasterSendLat.size() != linkMasterToSlaveLat.size()
+           || linkMasterToSlaveLat.size() != linkCrossbarToVaultLat.size()
+           || linkCrossbarToVaultLat.size() != vaultToDRAMCommandLat.size()
+           || vaultToDRAMCommandLat.size() != vaultToCrossbarLat.size()
+           || vaultToCrossbarLat.size() != crossbarToLinkMasterLat.size()
+           || crossbarToLinkMasterLat.size() != linkMasterUpstreamToLinkSlaveLat.size()) {
             ERROR(" == Error - Traces vector size are different (tranFullLat : "<<tranFullLat.size()
                   <<", linkFullLat : "<<linkFullLat.size()<<", vaultFullLat : "<<vaultFullLat.size());
             exit(0);
@@ -774,9 +782,12 @@ namespace CasHMC
         string resNameVaultLatency = logName + realTraceName + "_vault_latency.log";
         vaultLatencyOut.open(resNameVaultLatency.c_str());
         
+        string resNameDecoupledLatency = logName + realTraceName + "_decoupled_latency.csv";
+        decoupledLatencyOut.open(resNameDecoupledLatency.c_str());
         // string resNameErrorLatency = logName + realTraceName + "_error_latency.log";
         // errorRetryLatencyOut.open(resNameErrorLatency.c_str());
-        
+        decoupledLatencyOut << "HMC controller to Master link," << "Master to crossbar," << "crossbar to vault," << "vault to crossbar," << "Crossbar to link master," << "link master to hmc contrller,"<< "transaction full latency" << endl;
+
         for(int i=0; i<tranCount; i++) {
             tranFullMax = max(tranFullLat[i], tranFullMax);
             tranFullMin = min(tranFullLat[i], tranFullMin);
@@ -795,6 +806,10 @@ namespace CasHMC
             vaultStdSum += pow(vaultFullLat[i]-vaultFullMean, 2);
             
             vaultLatencyOut << vaultFullLat[i] << endl;
+            
+            //decoupledLatencyOut << linkMasterAvailabilityLat[i] << "\t" << linkMasterSendLat[i] << "\t" << linkMasterToSlaveLat[i] << "\t" << linkCrossbarToVaultLat[i] << "\t" << vaultToDRAMCommandLat[i] << "\t" << vaultToCrossbarLat[i] << "\t" << crossbarToLinkMasterLat[i] << "\t" << linkMasterUpstreamToLinkSlaveLat[i] << "\t" << linkMasterToHMCControllerLat[i] << "\t" << tranFullLat[i] << endl;
+            decoupledLatencyOut << linkMasterSendLat[i] << "," << linkCrossbarToVaultLat[i] << "," << vaultToDRAMCommandLat[i] << "," << vaultToCrossbarLat[i] << "," << linkMasterUpstreamToLinkSlaveLat[i] << "," << linkMasterToHMCControllerLat[i] << "," << tranFullLat[i] << endl;
+
         }
         for(int i=0; i<errorCount; i++) {
             errorRetryMax = max(errorRetryLat[i], errorRetryMax);

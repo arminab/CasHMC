@@ -92,7 +92,10 @@ void CrossbarSwitch::Update()
 					unsigned vaultMap = (downBuffers[i]->ADRS >> _log2(ADDRESS_MAPPING)) & (NUM_VAULTS-1);
 					if(downBufferDest[vaultMap]->ReceiveDown(downBuffers[i])) {
 						DEBUG(ALI(18)<<header<<ALI(15)<<*downBuffers[i]<<"Down) SENDING packet to vault controller "<<vaultMap<<" (VC_"<<vaultMap<<")");
-                        downBuffers[i]->trace->linkCrossbarToVaultLatency = currentClockCycle - (downBuffers[i]->trace->tranTransmitTime + downBuffers[i]->trace->linkMasterAvailabilityLatency + downBuffers[i]->trace->linkMasterSendLatency + downBuffers[i]->trace->linkMasterToSlaveLatency + downBuffers[i]->trace->linkSlaveToCrossbarLatency);
+                        if (downBuffers[i]->packetType == REQUEST && downBuffers[i]->trace != NULL) {
+                            downBuffers[i]->trace->linkCrossbarToVaultLatency = currentClockCycle - (downBuffers[i]->trace->tranTransmitTime + downBuffers[i]->trace->linkMasterAvailabilityLatency + downBuffers[i]->trace->linkMasterSendLatency + downBuffers[i]->trace->linkMasterToSlaveLatency + downBuffers[i]->trace->linkSlaveToCrossbarLatency);
+                            //downBuffers[i]->trace->linkCrossbarToVaultLatency = currentClockCycle;
+                        }
 						downBuffers.erase(downBuffers.begin()+i, downBuffers.begin()+i+downBuffers[i]->LNG);
 						i--;
 					}
@@ -187,7 +190,11 @@ void CrossbarSwitch::Update()
 					else {
 						if(upBufferDest[link]->Receive(upBuffers[i])) {
 							DEBUG(ALI(18)<<header<<ALI(15)<<*upBuffers[i]<<"Up)   SENDING packet to link master "<<link<<" (LM_U"<<link<<")");
-                            upBuffers[i]->trace->crossbarToLinkMasterLatency = currentClockCycle - (upBuffers[i]->trace->tranTransmitTime + upBuffers[i]->trace->linkMasterAvailabilityLatency + upBuffers[i]->trace->linkMasterSendLatency + upBuffers[i]->trace->linkMasterToSlaveLatency + upBuffers[i]->trace->linkSlaveToCrossbarLatency + upBuffers[i]->trace->linkCrossbarToVaultLatency + upBuffers[i]->trace->vaultToDRAMCommandLatency + upBuffers[i]->trace->vaultToCrossbarLatency);
+                            if (upBuffers[i]->packetType == RESPONSE && upBuffers[i]->trace != NULL) {
+                                
+                                //upBuffers[i]->trace->crossbarToLinkMasterLatency = currentClockCycle - (upBuffers[i]->trace->tranTransmitTime + upBuffers[i]->trace->linkMasterAvailabilityLatency + upBuffers[i]->trace->linkMasterSendLatency + upBuffers[i]->trace->linkMasterToSlaveLatency + upBuffers[i]->trace->linkSlaveToCrossbarLatency + upBuffers[i]->trace->linkCrossbarToVaultLatency + upBuffers[i]->trace->vaultToDRAMCommandLatency + upBuffers[i]->trace->vaultToCrossbarLatency);
+                                
+                            }
 							upBuffers.erase(upBuffers.begin()+i, upBuffers.begin()+i+upBuffers[i]->LNG);
 							i--;
 							break;

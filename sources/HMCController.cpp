@@ -166,7 +166,7 @@ void HMCController::Update()
 								(*writeDone)(packet->ADRS, currentClockCycle);
 							}
 						}
-                        packet->trace->linkMasterAvailabilityLatency = currentClockCycle - packet->trace->tranTransmitTime;
+                        //packet->trace->linkMasterAvailabilityLatency = currentClockCycle - packet->trace->tranTransmitTime;
 						requestAccLNG += packet->LNG;
 						delete downBuffers[0];
 						downBuffers.erase(downBuffers.begin());
@@ -206,6 +206,8 @@ void HMCController::Update()
 		else {
 			DE_CR(ALI(18)<<header<<ALI(15)<<*upBuffers[0]<<"Up)   RETURNING transaction to system bus");
 			upBuffers[0]->trace->tranFullLat = currentClockCycle - upBuffers[0]->trace->tranTransmitTime;
+            //upBuffers[0]->trace->linkMasterToHMCControllerLatency = currentClockCycle - (upBuffers[0]->trace->tranTransmitTime + upBuffers[0]->trace->linkMasterAvailabilityLatency + upBuffers[0]->trace->linkMasterSendLatency + upBuffers[0]->trace->linkMasterToSlaveLatency + upBuffers[0]->trace->linkSlaveToCrossbarLatency + upBuffers[0]->trace->linkCrossbarToVaultLatency + upBuffers[0]->trace->vaultToDRAMCommandLatency + upBuffers[0]->trace-> vaultToCrossbarLatency + upBuffers[0]->trace->crossbarToLinkMasterLatency + upBuffers[0]->trace->linkMasterUpstreamtoLinkSlaveLatency);
+            upBuffers[0]->trace->linkMasterToHMCControllerLatency = currentClockCycle - (upBuffers[0]->trace->tranTransmitTime + upBuffers[0]->trace->linkMasterAvailabilityLatency + upBuffers[0]->trace->linkMasterSendLatency + upBuffers[0]->trace->linkMasterToSlaveLatency + upBuffers[0]->trace->linkCrossbarToVaultLatency + upBuffers[0]->trace->vaultToDRAMCommandLatency + upBuffers[0]->trace-> vaultToCrossbarLatency + upBuffers[0]->trace->crossbarToLinkMasterLatency + upBuffers[0]->trace->linkMasterUpstreamtoLinkSlaveLatency);
 			if(upBuffers[0]->CMD == RD_RS) {
 				upBuffers[0]->trace->statis->hmcTransmitSize += (upBuffers[0]->LNG - 1)*16;
 			}

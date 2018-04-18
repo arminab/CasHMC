@@ -104,10 +104,20 @@ public:
 			totalUpLinkDataSize.push_back(0);
 		}		
 	}
-	void UpdateStatis(unsigned tranFull, unsigned linkFull, unsigned vaultFull, unsigned linkMasterAvailabilityLatency, unsigned linkMasterSendLatency, unsigned linkMasterToSlaveLatency, unsigned linkCrossbarToVaultLatency, unsigned vaultToDRAMCommandLatency, unsigned vaultToCrossbarLatency, unsigned crossbarToLinkMasterLatency, unsigned linkMasterUpstreamtoLinkSlaveLatency) {
+	void UpdateStatis(unsigned tranFull, unsigned linkFull, unsigned vaultFull, unsigned linkMasterAvailabilityLatency, unsigned linkMasterSendLatency, unsigned linkMasterToSlaveLatency, unsigned linkCrossbarToVaultLatency, unsigned vaultToDRAMCommandLatency, unsigned vaultToCrossbarLatency, unsigned crossbarToLinkMasterLatency, unsigned linkMasterUpstreamtoLinkSlaveLatency, unsigned linkMasterToHMCControllerLatency) {
 		tranFullLat.push_back(tranFull);
 		linkFullLat.push_back(linkFull);
 		vaultFullLat.push_back(vaultFull);
+        
+        linkMasterAvailabilityLat.push_back(linkMasterAvailabilityLatency);
+        linkMasterSendLat.push_back(linkMasterSendLatency);
+        linkMasterToSlaveLat.push_back(linkMasterToSlaveLatency);
+        linkCrossbarToVaultLat.push_back(linkCrossbarToVaultLatency);
+        vaultToDRAMCommandLat.push_back(vaultToDRAMCommandLatency);
+        vaultToCrossbarLat.push_back(vaultToCrossbarLatency);
+        crossbarToLinkMasterLat.push_back(crossbarToLinkMasterLatency);
+        linkMasterUpstreamToLinkSlaveLat.push_back(linkMasterUpstreamtoLinkSlaveLatency);
+        linkMasterToHMCControllerLat.push_back(linkMasterToHMCControllerLatency);
 		
 		tranFullSum += tranFull;
 		linkFullSum += linkFull;
@@ -119,6 +129,16 @@ public:
 	vector<unsigned> linkFullLat;
 	vector<unsigned> vaultFullLat;
 	vector<unsigned> errorRetryLat;
+    
+    vector<unsigned> linkMasterAvailabilityLat;
+    vector<unsigned> linkMasterSendLat;
+    vector<unsigned> linkMasterToSlaveLat;
+    vector<unsigned> linkCrossbarToVaultLat;
+    vector<unsigned> vaultToDRAMCommandLat;
+    vector<unsigned> vaultToCrossbarLat;
+    vector<unsigned> crossbarToLinkMasterLat;
+    vector<unsigned> linkMasterUpstreamToLinkSlaveLat;
+    vector<unsigned> linkMasterToHMCControllerLat;
 	
 	vector<uint64_t> readPerLink;
 	vector<uint64_t> writePerLink;
